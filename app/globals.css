@@ -2,20 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+.btn{
+    @apply bg-sky-900 text-white px-4 py-2 rounded-md font-semibold hover:scale-105 transition;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+h1{
+    @apply text-sky-950 font-bold text-2xl;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+h2{
+    @apply font-semibold text-2xl my-4;
 }
