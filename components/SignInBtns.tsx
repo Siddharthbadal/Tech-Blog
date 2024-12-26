@@ -6,8 +6,11 @@ import { signIn } from "next-auth/react";
 
 
 export default function SignInBtns() {
-  const handleGithubSignIn= ()=>signIn('github')
-  const handleGoogleSignIn= ()=>signIn('google')
+  const handleGithubSignIn= ()=>signIn('github');
+  const handleGoogleSignIn= (e:any)=>{
+    e.preventDefault();
+    signIn('google');
+  }
 
   return (
     <>
@@ -23,16 +26,21 @@ export default function SignInBtns() {
               text={'Sign In with Google'}
               onClick={handleGoogleSignIn}
               />
-            {/* <button className="flex items-center border p-4 rounded-full gap-4 hover:bg-sky-100 ">
-                <span>
-                    <Image  src={'/github.png'}
-                    width={30}
-                    height={30}
-                    alt="github"
-                    />
-                </span>
-                Sign In with Github
-            </button> */}
+
+              {/* <button className="flex items-center border p-4 rounded-full gap-4 hover:bg-sky-100 mb-2"
+              onClick={()=>signIn('google')}
+              >
+                          <span>
+                              <Image  src={'/google.png'}
+                              width={30}
+                              height={30}
+                              alt="github"
+                              
+                              />
+                          </span>
+                                 SignIN
+                  </button> */}
+            
         </div>
     </>
   )
