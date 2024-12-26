@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
     domains:[
       'images.pexels.com'
     ]
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

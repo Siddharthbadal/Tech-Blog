@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import DeleteButton from "./DeleteButton";
 
 interface PostProps{
     id: string,
@@ -24,6 +25,8 @@ export default function Post({
     content,
     links,
 }: PostProps) {
+    const isEditable = true;
+
   return (
     <div className="my-4 border-b border-b-300 py-8">
             <div className="mb-2">
@@ -54,20 +57,39 @@ export default function Post({
             </span>
 
             <h2>{title}</h2>
-            <p>{content}</p>
+            <p className="content">{content}</p>
             {
                 links && (
-                    <div>
+                    <div className="my-4 flex flex-col gap-2">
                         {links.map((link, i)=>(
-                            <div key={link}> 🔗 &nbsp;
-                                <Link href={link} >
-                                    {link}
+                            <div key={i}
+                            className="flex gap-2 items-center"
+                            >
+                                 🔗 &nbsp;
+                                <Link href={link} className="link" target="_blank">
+                                    Read More
                                 </Link>
                             </div>
                         ))}
                     </div>
                 )
             }
+
+            {
+                isEditable && (
+                    <div className="flex flex-row gap-2 py-2 px-4 rounded-sm w-fit">
+                        <Link href={`/edit-post/${id}`}
+                            className="text-gray-600 font-semibold tracking-wider border border-gray-200 px-2 hover:bg-sky-50 rounded-sm"
+                        >
+                           
+                                Edit
+                           
+                        </Link>
+                        <DeleteButton   />
+                    </div>
+                )
+            }
+
 
 
     </div>
