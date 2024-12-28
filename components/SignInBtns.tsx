@@ -27,19 +27,7 @@ export default function SignInBtns() {
               onClick={handleGoogleSignIn}
               />
 
-              {/* <button className="flex items-center border p-4 rounded-full gap-4 hover:bg-sky-100 mb-2"
-              onClick={()=>signIn('google')}
-              >
-                          <span>
-                              <Image  src={'/google.png'}
-                              width={30}
-                              height={30}
-                              alt="github"
-                              
-                              />
-                          </span>
-                                 SignIN
-                  </button> */}
+              
             
         </div>
     </>
