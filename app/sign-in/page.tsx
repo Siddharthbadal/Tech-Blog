@@ -1,7 +1,7 @@
 import SignInBtns from "@/components/SignInBtns";
 import { getServerSession } from "next-auth/next";
 
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../utilis/authoptions";
 import { redirect } from "next/navigation";
 
 export default async function SignIn() {

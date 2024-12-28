@@ -4,8 +4,9 @@ import Link from "next/link";
 
 import { getServerSession } from "next-auth/next";
 
-import { authOptions } from "../api/auth/[...nextauth]/route";
+
 import { redirect } from "next/navigation";
+import { authOptions } from "../utilis/authoptions";
 
 
 export default async function page() {
