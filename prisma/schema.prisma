@@ -9,7 +9,7 @@ generator client {
  
 model User {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
+  name          String?         @unique
   email         String?         @unique
   emailVerified DateTime?       
   image         String?
@@ -17,7 +17,8 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
- 
+  
+  posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -78,4 +79,28 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@unique([userId, credentialID])
+}
+
+model Post{
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId  
+  title         String
+  content       String
+  imageUrl      String?
+  publicId      String?
+  categoryName  String?
+  category      Category? @relation(fields: [categoryName], references:[categoryName]) 
+  authorName    User      @relation(fields: [authorEmail], references:[email])
+  authorEmail   String    
+  links         String[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model Category{
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  categoryName  String @unique
+  posts         Post[]
+  postId        String[]  @db.ObjectId
 }
