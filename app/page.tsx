@@ -1,6 +1,6 @@
 import CategoriesList from "@/components/CategoriesList";
 import Post from "@/components/Post";
-import { postsData } from "@/data/posts"
+import { TPost } from "./types";
 
 const getPosts = async (): Promise<TPost[] | null> => {
     try{
