@@ -3,9 +3,9 @@ import prisma from "@/lib/prismadb";
 import { getServerSession } from "next-auth/next";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, {params}:{params: {id:string}}) {
+export async function GET(req: Request, {params}:{params: Promise<{id:string}>}) {
     try{
-        const id = params.id 
+        const {id} = await params
     const post = await prisma.post.findUnique({ where: {id}});
     return NextResponse.json(post)
     }
