@@ -16,13 +16,13 @@ export async function GET(req: Request, {params}:{params: Promise<{id:string}>})
 }
 
 
-export async function PUT(req: Request, {params}:{params: {id:string}}) {
+export async function PUT(req: Request, {params}:{params: Promise<{id:string}>}) {
     const session = await getServerSession(authOptions);
         if(!session){
             return NextResponse.json({error: "Not authenticated"}, {status: 401})
         }
     const { title, content, links, selectedCategory, imageUrl, publicId} = await req.json();
-    const id = params.id;
+    const {id} = await params
     try {
         const post = await prisma.post.update({
         where: {id},
@@ -38,13 +38,13 @@ export async function PUT(req: Request, {params}:{params: {id:string}}) {
     }
 }
 
-export async function DELETE(req: Request, {params}:{params: {id:string}}){
+export async function DELETE(req: Request, {params}:{params: Promise<{id:string}>}){
     const session = await getServerSession(authOptions);
     if(!session){
         return NextResponse.json({error: "Not authenticated"}, {status: 401})
     }
     
-    const id = params.id 
+    const {id} = await params
     try{
         const post = await prisma.post.delete({where: {id}});
         return NextResponse.json(post)
