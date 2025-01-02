@@ -1,11 +1,24 @@
 import prisma from "@/lib/prismadb";
 import { NextRequest, NextResponse } from "next/server";
 
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/utilis/authoptions";
+
+
 export async function POST(req: Request){
+    const session = await getServerSession(authOptions);
+    if(!session){
+        return NextResponse.json({error: "Not authenticated"}, {status: 401})
+    }
+
+
     const {title, content, links, selectedCategory, imageUrl, publicId} = await req.json();
 
-    const authorEmail = 'indiandevcom@gmail.com'
-    const authorName = 'indidev'
+    const authorEmail = session?.user?.email as string
+    const authorName = session?.user?.name as string
+
+    console.log(authorEmail)
+    console.log(authorName)
 
     if (!title || !content ) {
         return NextResponse.json({error: "Title and content required"}, { status: 500});
